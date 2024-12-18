@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bpi-test
+    username: postgres
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+    defer-datasource-initialization: true
+  web:
+    resources:
+      add-mappings: true
+  cache:
+    type: none
+
+server:
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+  port: 8080

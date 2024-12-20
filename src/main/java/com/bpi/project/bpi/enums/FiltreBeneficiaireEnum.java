@@ -1,4 +1,4 @@
-package com.bpi.project.bpi;
+package com.bpi.project.bpi.enums;
 
 public enum FiltreBeneficiaireEnum {
     TOUS,

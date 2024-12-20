@@ -1,7 +1,7 @@
 package com.bpi.project.bpi.controller;
 
-import com.bpi.project.bpi.FiltreBeneficiaireEnum;
-import com.bpi.project.bpi.dto.BeneficiaireProjection;
+import com.bpi.project.bpi.dto.BeneficiaireDto;
+import com.bpi.project.bpi.enums.FiltreBeneficiaireEnum;
 import com.bpi.project.bpi.models.Entreprise;
 import com.bpi.project.bpi.repository.EntrepriseRepository;
 import com.bpi.project.bpi.service.BeneficiaireService;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,8 +23,8 @@ public class BeneficiaireController {
     private final EntrepriseRepository entrepriseRepository;
 
     @GetMapping("")
-    public ResponseEntity<List<BeneficiaireProjection>> getListBeneficiaire(@RequestParam("idEntreprise") Long idEntreprise,
-                                                                            @RequestParam(value = "filtre", defaultValue = "TOUS") FiltreBeneficiaireEnum filtre) {
+    public ResponseEntity<BeneficiaireDto> getListBeneficiaire(@RequestParam("idEntreprise") Long idEntreprise,
+                                                               @RequestParam(value = "filtre", defaultValue = "TOUS") FiltreBeneficiaireEnum filtre) {
 
         Optional<Entreprise> entrepriseOptional = entrepriseRepository.findById(idEntreprise);
 
@@ -33,12 +32,12 @@ public class BeneficiaireController {
             return ResponseEntity.notFound().build();
         }
 
-        List<BeneficiaireProjection> beneficiaireProjections = beneficiaireService.getBeneficiaires(idEntreprise, filtre);
+        BeneficiaireDto beneficiaireDto = beneficiaireService.getBeneficiaires(entrepriseOptional.get(), filtre);
 
-        if (beneficiaireProjections == null || beneficiaireProjections.isEmpty()) {
+        if (beneficiaireDto.getListInvestisseurs() == null || beneficiaireDto.getListInvestisseurs().isEmpty()) {
             return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok(beneficiaireProjections);
+        return ResponseEntity.ok(beneficiaireDto);
     }
 }

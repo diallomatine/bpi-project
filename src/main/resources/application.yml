@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bpi-test
+    url: jdbc:postgresql://localhost:5432/bpi-exo-abdoul
     username: postgres
     password:
   jpa:

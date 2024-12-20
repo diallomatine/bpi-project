@@ -1,8 +1,6 @@
 package com.bpi.project.bpi.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PersonnePhysique {
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

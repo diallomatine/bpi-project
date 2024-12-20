@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Setter
 public class Investissements {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
